@@ -20,7 +20,7 @@ const EditTicket = () => {
   }
 
   useEffect(() => {
-    fetchTicket(state);
+    fetchTicket(state as TicketData);
   }, []);
 
   const handleSubmit = (e: FormEvent) => {

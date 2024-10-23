@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { TicketData } from '../interfaces/TicketData';
 import { ApiMessage } from '../interfaces/ApiMessage';
@@ -10,6 +10,7 @@ interface TicketCardProps {
 }
 
 const TicketCard = ({ ticket, deleteTicket }: TicketCardProps) => {
+  const navigate = useNavigate();
 
   const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
     const ticketId = Number(event.currentTarget.value);
@@ -27,8 +28,8 @@ const TicketCard = ({ ticket, deleteTicket }: TicketCardProps) => {
     <div className='ticket-card'>
       <h3>{ticket.name}</h3>
       <p>{ticket.description}</p>
-      <p>{ticket.assignedUser?.username}</p>
-      <Link to='/edit' state={{id: ticket.id}} type='button' className='editBtn'>Edit</Link>
+      <button type='button' onClick={() => navigate('/edit', { state: { id: ticket.id } })} className='editBtn'>Edit</button>
+
       <button type='button' value={String(ticket.id)} onClick={handleDelete} className='deleteBtn'>Delete</button>
     </div>
   );
